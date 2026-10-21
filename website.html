@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="News, research and campus updates from the University of Layyah.">
+    <title>University of Layyah &mdash; Blog</title>
+    <link rel="stylesheet" href="./src/output.css">
+</head>
+<body class="min-h-screen bg-slate-50 text-slate-800">
+
+    <!--
+      ============================ PAGE WRAPPER ============================
+      FLEX LESSON: `mx-auto` splits the LEFTOVER horizontal space around a
+      block element. <body> is already full width, so putting `mx-auto` on it
+      does nothing — there is no leftover space to split.
+
+      `max-w-7xl` supplies the missing constraint. Constrain first, then
+      centre. Every full-width band on this page repeats this pattern.
+    -->
+    <div class="mx-auto max-w-7xl px-4 py-6">
+
+        <!--
+          ============================== HEADER ==============================
+          FLEX LESSON: `justify-between`, `items-center` and `gap-*` are
+          CONTAINER properties. They describe how a parent distributes its
+          children, so they only take effect on an element that is itself
+          `flex`. On a plain block element they are silently ignored.
+
+          The previous version put `justify-between` on the <nav> (a block)
+          and `items-center` on <body> (a block). Both did nothing. Flex
+          belongs on the PARENT — here, the <header>.
+
+          `flex-col md:flex-row` is the mobile-first rule: stack by default,
+          switch to a row from the `md` breakpoint up.
+        -->
+        <header class="flex flex-col gap-4 rounded-xl bg-blue-800 px-6 py-4 text-white md:flex-row md:items-center md:justify-between">
+
+            <!--
+              FLEX LESSON: nested flex. This group needs its own `flex` because
+              it lays out ITS OWN children (logo + text block). `gap-3` spaces
+              them — no margins needed on the children themselves.
+            -->
+            <div class="flex items-center gap-3">
+                <!--
+                  FLEX LESSON: size with h-*/w-*, never with padding.
+                  The old version was `h-16 w-16 ... p-4`. Tailwind sets
+                  box-sizing: border-box, so the 1rem padding was carved OUT of
+                  the 64px box, rendering the logo at 32px instead of 64px.
+
+                  `object-contain` stops the image being stretched, since the
+                  logo is not a perfect square but h-11 w-11 forces one.
+                -->
+                <img src="University_Logo.jpeg"
+                     alt="University of Layyah crest"
+                     class="h-11 w-11 shrink-0 rounded-full bg-white object-contain p-1">
+
+                <div class="flex flex-col">
+                    <h1 class="text-lg font-bold leading-tight sm:text-xl">University of Layyah</h1>
+                    <p class="text-xs font-medium text-blue-200">University Blog</p>
+                </div>
+            </div>
+
+            <!--
+              FLEX LESSON: a <ul> is the correct semantic container for a nav,
+              and `flex gap-6` on the <ul> puts the items in a row with even
+              spacing. `gap` is preferable to margins on the <li>s because you
+              don't get a stray gap on the first or last item.
+
+              Note there is NO JavaScript here, so the nav simply wraps on
+              small screens. A hamburger menu would need JS to toggle — out of
+              scope for this page.
+            -->
+            <nav aria-label="Main">
+                <ul class="flex flex-wrap items-center gap-x-6 gap-y-2">
+                    <li>
+                        <!-- `focus-visible:ring-2` gives keyboard users a visible focus indicator. -->
+                        <a href="website.html"
+                           class="rounded font-medium text-blue-100 transition hover:text-white focus-visible:ring-2 focus-visible:ring-white">
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="htmlForm.html"
+                           class="rounded font-medium text-blue-100 transition hover:text-white focus-visible:ring-2 focus-visible:ring-white">
+                            Contact Us
+                        </a>
+                    </li>
+                    <li>
+                        <a href="index.html"
+                           class="rounded font-medium text-blue-100 transition hover:text-white focus-visible:ring-2 focus-visible:ring-white">
+                            Flex Demo
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <!--
+          =============================== HERO ===============================
+          FLEX LESSON: `flex flex-col gap-4` stacks the category badge, title,
+          excerpt and button with even spacing. Using a flex column here means
+          no `<br>` tags and no margin stacking.
+        -->
+        <section class="relative mt-6 overflow-hidden rounded-xl">
+            <!-- Decorative background image, so alt is intentionally empty. -->
+            <img src="city.jpg"
+                 alt=""
+                 class="absolute inset-0 h-full w-full object-cover">
+
+            <!-- Dark overlay so white text stays readable over the photo. -->
+            <div class="absolute inset-0 bg-blue-950/75"></div>
+
+            <!-- `relative` lifts this above the absolutely-positioned layers. -->
+            <div class="relative flex max-w-3xl flex-col items-start gap-4 px-6 py-12 sm:px-10 sm:py-16">
+                <span class="rounded-full bg-amber-400 px-3 py-1 text-xs font-bold uppercase tracking-wide text-blue-950">
+                    Featured
+                </span>
+
+                <h2 class="text-2xl font-bold leading-tight text-white sm:text-4xl">
+                    University of Layyah Opens New Research Wing
+                </h2>
+
+                <p class="text-sm text-blue-100 sm:text-base">
+                    The new facility adds twelve laboratories and a collaborative
+                    workspace, giving students across all departments access to
+                    equipment that was previously unavailable on campus.
+                </p>
+
+                <!--
+                  FLEX LESSON: a tiny nested flex row. `items-center` vertically
+                  centres the dot against the text, which is awkward to do with
+                  inline elements and vertical-align.
+                -->
+                <div class="flex items-center gap-2 text-xs text-blue-200">
+                    <span>05 September 2026</span>
+                    <span aria-hidden="true" class="h-1 w-1 rounded-full bg-blue-300"></span>
+                    <span>3 min read</span>
+                </div>
+
+                <a href="website.html"
+                   class="mt-2 rounded-lg bg-white px-5 py-2.5 text-sm font-semibold text-blue-900 transition hover:bg-blue-50 focus-visible:ring-2 focus-visible:ring-white">
+                    Read the full story
+                </a>
+            </div>
+        </section>
+
+        <!--
+          ======================= MAIN + SIDEBAR REGION =======================
+          FLEX LESSON: this is the core two-column layout.
+          `flex-col lg:flex-row` stacks the content and sidebar on narrow
+          screens, then places them side by side from `lg` up.
+
+          `gap-8` spaces the two columns. No margins needed.
+        -->
+        <div class="mt-8 flex flex-col gap-8 lg:flex-row">
+
+            <!-- ============================ POSTS ============================ -->
+            <main class="flex-1">
+                <div class="mb-4 flex items-baseline justify-between gap-4">
+                    <h2 class="text-xl font-bold text-slate-900">Latest Posts</h2>
+                    <a href="website.html" class="text-sm font-semibold text-blue-700 hover:underline">View all</a>
+                </div>
+
+                <!--
+                  FLEX LESSON: `flex-wrap` lets the cards spill onto a new row
+                  instead of being squeezed. Each card then claims a share of
+                  the row via `basis-80 grow`:
+                    - `basis-80` is the IDEAL starting width (20rem).
+                    - `grow` lets a card absorb any leftover space in its row,
+                      which is what makes the final short row look tidy rather
+                      than leaving a ragged hole.
+
+                  NOTE: in production, CSS Grid is the more idiomatic choice for
+                  a card grid, because it keeps every column the same width
+                  without the `grow` trick. Flex is used here on purpose — this
+                  is a flexbox exercise.
+                -->
+                <div class="flex flex-wrap gap-6">
+
+                    <!-- ======================= CARD 1 ======================= -->
+                    <!--
+                      FLEX LESSON: `flex flex-col` on the card, then `mt-auto`
+                      on the last child (the byline). `mt-auto` in a flex column
+                      eats all remaining vertical space, pinning the byline to
+                      the bottom — so cards of different text lengths still line
+                      up their footers. A classic flexbox trick.
+                    -->
+                    <article class="flex basis-80 grow flex-col overflow-hidden rounded-xl bg-white shadow-md">
+                        <div class="h-2 bg-linear-to-r from-blue-600 to-cyan-400"></div>
+
+                        <div class="flex flex-1 flex-col gap-3 p-5">
+                            <span class="text-xs font-bold uppercase tracking-wide text-blue-700">Admissions</span>
+                            <h3 class="text-lg font-bold leading-snug text-slate-900">
+                                <a href="website.html" class="hover:underline">Admissions Open for Fall 2026</a>
+                            </h3>
+                            <p class="text-sm text-slate-600">
+                                Applications are now being accepted across all undergraduate
+                                and postgraduate programmes. The deadline is 30 November.
+                            </p>
+                            <div class="mt-auto flex items-center gap-2 border-t border-slate-200 pt-3 text-xs text-slate-500">
+                                <span>28 August 2026</span>
+                                <span aria-hidden="true" class="h-1 w-1 rounded-full bg-slate-400"></span>
+                                <span>2 min read</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ======================= CARD 2 ======================= -->
+                    <article class="flex basis-80 grow flex-col overflow-hidden rounded-xl bg-white shadow-md">
+                        <div class="h-2 bg-linear-to-r from-emerald-600 to-lime-400"></div>
+
+                        <div class="flex flex-1 flex-col gap-3 p-5">
+                            <span class="text-xs font-bold uppercase tracking-wide text-emerald-700">Research</span>
+                            <h3 class="text-lg font-bold leading-snug text-slate-900">
+                                <a href="website.html" class="hover:underline">Research Symposium Draws Record Attendance</a>
+                            </h3>
+                            <p class="text-sm text-slate-600">
+                                Over four hundred students presented work spanning agriculture,
+                                computer science and environmental engineering.
+                            </p>
+                            <div class="mt-auto flex items-center gap-2 border-t border-slate-200 pt-3 text-xs text-slate-500">
+                                <span>21 August 2026</span>
+                                <span aria-hidden="true" class="h-1 w-1 rounded-full bg-slate-400"></span>
+                                <span>4 min read</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ======================= CARD 3 ======================= -->
+                    <article class="flex basis-80 grow flex-col overflow-hidden rounded-xl bg-white shadow-md">
+                        <div class="h-2 bg-linear-to-r from-violet-600 to-fuchsia-400"></div>
+
+                        <div class="flex flex-1 flex-col gap-3 p-5">
+                            <span class="text-xs font-bold uppercase tracking-wide text-violet-700">Campus</span>
+                            <h3 class="text-lg font-bold leading-snug text-slate-900">
+                                <a href="website.html" class="hover:underline">New Library Wing Opens to Students</a>
+                            </h3>
+                            <p class="text-sm text-slate-600">
+                                Extended opening hours and three new reading rooms are now
+                                available on the ground floor of the main library.
+                            </p>
+                            <div class="mt-auto flex items-center gap-2 border-t border-slate-200 pt-3 text-xs text-slate-500">
+                                <span>14 August 2026</span>
+                                <span aria-hidden="true" class="h-1 w-1 rounded-full bg-slate-400"></span>
+                                <span>2 min read</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ======================= CARD 4 ======================= -->
+                    <article class="flex basis-80 grow flex-col overflow-hidden rounded-xl bg-white shadow-md">
+                        <div class="h-2 bg-linear-to-r from-amber-500 to-orange-400"></div>
+
+                        <div class="flex flex-1 flex-col gap-3 p-5">
+                            <span class="text-xs font-bold uppercase tracking-wide text-amber-700">Students</span>
+                            <h3 class="text-lg font-bold leading-snug text-slate-900">
+                                <a href="website.html" class="hover:underline">Student Team Wins National Robotics Title</a>
+                            </h3>
+                            <p class="text-sm text-slate-600">
+                                A six-member team took first place in the national finals,
+                                beating twenty-two other universities.
+                            </p>
+                            <div class="mt-auto flex items-center gap-2 border-t border-slate-200 pt-3 text-xs text-slate-500">
+                                <span>09 August 2026</span>
+                                <span aria-hidden="true" class="h-1 w-1 rounded-full bg-slate-400"></span>
+                                <span>3 min read</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ======================= CARD 5 ======================= -->
+                    <article class="flex basis-80 grow flex-col overflow-hidden rounded-xl bg-white shadow-md">
+                        <div class="h-2 bg-linear-to-r from-rose-600 to-pink-400"></div>
+
+                        <div class="flex flex-1 flex-col gap-3 p-5">
+                            <span class="text-xs font-bold uppercase tracking-wide text-rose-700">Faculty</span>
+                            <h3 class="text-lg font-bold leading-snug text-slate-900">
+                                <a href="website.html" class="hover:underline">Faculty Spotlight: Dr. Ayesha Khan</a>
+                            </h3>
+                            <p class="text-sm text-slate-600">
+                                A conversation about soil science, fieldwork with students,
+                                and why she thinks labs should start outdoors.
+                            </p>
+                            <div class="mt-auto flex items-center gap-2 border-t border-slate-200 pt-3 text-xs text-slate-500">
+                                <span>02 August 2026</span>
+                                <span aria-hidden="true" class="h-1 w-1 rounded-full bg-slate-400"></span>
+                                <span>6 min read</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ======================= CARD 6 ======================= -->
+                    <article class="flex basis-80 grow flex-col overflow-hidden rounded-xl bg-white shadow-md">
+                        <div class="h-2 bg-linear-to-r from-slate-600 to-slate-400"></div>
+
+                        <div class="flex flex-1 flex-col gap-3 p-5">
+                            <span class="text-xs font-bold uppercase tracking-wide text-slate-700">Academics</span>
+                            <h3 class="text-lg font-bold leading-snug text-slate-900">
+                                <a href="website.html" class="hover:underline">Mid-Term Examination Schedule Released</a>
+                            </h3>
+                            <p class="text-sm text-slate-600">
+                                The full timetable for all departments is now published on the
+                                student portal. Check your seat number in advance.
+                            </p>
+                            <div class="mt-auto flex items-center gap-2 border-t border-slate-200 pt-3 text-xs text-slate-500">
+                                <span>27 July 2026</span>
+                                <span aria-hidden="true" class="h-1 w-1 rounded-full bg-slate-400"></span>
+                                <span>1 min read</span>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+            </main>
+
+            <!--
+              ============================ SIDEBAR ============================
+              FLEX LESSON: two things are happening here.
+
+              1. `lg:w-80` sets a fixed width for the sidebar once we are side by
+                 side. Because the parent <main> has `flex-1`, the main column
+                 takes whatever is left over.
+
+              2. `shrink-0` is the important one. By default a flex item is
+                 allowed to shrink when space runs short, so a long post title
+                 could squash this sidebar. `shrink-0` forbids that — the sidebar
+                 keeps its width and the main column shrinks instead.
+            -->
+            <aside class="flex flex-col gap-6 lg:w-80 lg:shrink-0">
+
+                <!-- About widget -->
+                <section class="flex flex-col gap-3 rounded-xl bg-white p-5 shadow-md">
+                    <h2 class="text-base font-bold text-slate-900">About the Blog</h2>
+                    <p class="text-sm text-slate-600">
+                        News, research highlights and campus updates from the
+                        University of Layyah, published by the Office of
+                        Communications.
+                    </p>
+                </section>
+
+                <!-- Categories widget -->
+                <section class="flex flex-col gap-3 rounded-xl bg-white p-5 shadow-md">
+                    <h2 class="text-base font-bold text-slate-900">Categories</h2>
+
+                    <!--
+                      FLEX LESSON: `justify-between` pushes the label to the left
+                      and the count to the right — and here the parent <li> IS
+                      a flex container, so it actually works.
+                    -->
+                    <ul class="flex flex-col gap-2 text-sm">
+                        <li class="flex items-center justify-between gap-4 border-b border-slate-100 pb-2">
+                            <a href="website.html" class="text-slate-700 hover:text-blue-700 hover:underline">Admissions</a>
+                            <span class="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-600">4</span>
+                        </li>
+                        <li class="flex items-center justify-between gap-4 border-b border-slate-100 pb-2">
+                            <a href="website.html" class="text-slate-700 hover:text-blue-700 hover:underline">Research</a>
+                            <span class="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-600">12</span>
+                        </li>
+                        <li class="flex items-center justify-between gap-4 border-b border-slate-100 pb-2">
+                            <a href="website.html" class="text-slate-700 hover:text-blue-700 hover:underline">Campus</a>
+                            <span class="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-600">9</span>
+                        </li>
+                        <li class="flex items-center justify-between gap-4 border-b border-slate-100 pb-2">
+                            <a href="website.html" class="text-slate-700 hover:text-blue-700 hover:underline">Students</a>
+                            <span class="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-600">7</span>
+                        </li>
+                        <li class="flex items-center justify-between gap-4">
+                            <a href="website.html" class="text-slate-700 hover:text-blue-700 hover:underline">Academics</a>
+                            <span class="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-600">5</span>
+                        </li>
+                    </ul>
+                </section>
+
+                <!--
+                  FLEX LESSON: a CTA panel built with flex-column + `items-start`.
+                  `items-start` keeps the button at its natural width instead of
+                  stretching it to fill the column.
+                -->
+                <section class="flex flex-col items-start gap-3 rounded-xl bg-blue-800 p-5 text-white">
+
+                    <!-- Same border lesson from the old header: `border` supplies
+                         the WIDTH, `border-blue-400` only supplies the COLOUR.
+                         A colour with no width renders nothing. -->
+                    <h2 class="w-full border-b border-blue-400 pb-2 text-base font-bold">Get Updates</h2>
+                    <p class="text-sm text-blue-100">
+                        Subscribe to receive new posts by email.
+                    </p>
+                    <a href="htmlForm.html"
+                       class="rounded-lg bg-amber-400 px-4 py-2 text-sm font-semibold text-blue-950 transition hover:bg-amber-300 focus-visible:ring-2 focus-visible:ring-white">
+                        Subscribe
+                    </a>
+                </section>
+
+            </aside>
+        </div>
+    </div>
+
+    <!--
+      =============================== FOOTER ===============================
+      FLEX LESSON: this band is full-bleed (it is outside the max-w-7xl
+      wrapper), so it repeats the wrapper pattern internally to keep its content
+      aligned with the rest of the page.
+
+      `flex-col md:flex-row` stacks the columns on mobile and lays them out in a
+      row from `md` up, with `justify-between` spreading the brand away from the
+      link groups.
+    -->
+    <footer class="mt-10 bg-blue-900 text-blue-100">
+        <div class="mx-auto max-w-7xl px-4 py-10">
+
+            <div class="flex flex-col gap-8 md:flex-row md:justify-between">
+
+                <div class="flex flex-col gap-2 md:max-w-xs">
+                    <p class="text-base font-bold text-white">University of Layyah</p>
+                    <p class="text-sm text-blue-200">
+                        Office of Communications, Main Campus,
+                        Layyah, Punjab, Pakistan.
+                    </p>
+                </div>
+
+                <nav aria-label="Footer" class="flex flex-col gap-2 sm:flex-row sm:gap-10">
+                    <div class="flex flex-col gap-2">
+                        <p class="text-xs font-bold uppercase tracking-wide text-blue-300">Explore</p>
+                        <a href="website.html" class="text-sm hover:text-white hover:underline">Home</a>
+                        <a href="htmlForm.html" class="text-sm hover:text-white hover:underline">Contact Us</a>
+                        <a href="index.html" class="text-sm hover:text-white hover:underline">Flex Demo</a>
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <p class="text-xs font-bold uppercase tracking-wide text-blue-300">Student Links</p>
+                        <a href="htmlForm.html" class="text-sm hover:text-white hover:underline">Student Portal</a>
+                        <a href="htmlForm.html" class="text-sm hover:text-white hover:underline">Library</a>
+                        <a href="htmlForm.html" class="text-sm hover:text-white hover:underline">Examinations</a>
+                    </div>
+                </nav>
+            </div>
+
+            <p class="mt-8 border-t border-blue-800 pt-6 text-xs text-blue-300">
+                &copy; 2026 University of Layyah. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+</body>
+</html>
